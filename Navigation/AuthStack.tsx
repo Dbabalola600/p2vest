@@ -73,7 +73,7 @@ const AuthStack = () => {
 
             <Stack.Screen
                 name="DashBoardScreen"
-                component={AppStack}
+                component={DashBoardScreen}
                 options={{
                     headerTitle: '',
                     headerShown: false,

@@ -21,7 +21,7 @@ type Props = {
 const VerifcationScreen: React.FC<Props> = ({ route }) => {
 
     const [seconds, setSeconds] = useState(60);
-const navigation = useNavigation()
+    const navigation = useNavigation()
     useEffect(() => {
         const timer = setInterval(() => {
             setSeconds((prevSeconds) => {
@@ -45,10 +45,10 @@ const navigation = useNavigation()
 
 
 
-    const onsubmit = ()=>{
+    const onsubmit = () => {
         Toast.show({
-            type:"success",
-            text1:"Sucess"
+            type: "success",
+            text1: "Sucess"
         })
         navigation.navigate("SignIn")
     }
@@ -57,7 +57,8 @@ const navigation = useNavigation()
     return (
 
         <KeyboardAvoidingView
-            style={{ flex: 20 }} behavior="padding"
+        style={apptw` flex-1`}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
             <BasicBackButtonLayout>
                 <View style={apptw`mt-30`}>

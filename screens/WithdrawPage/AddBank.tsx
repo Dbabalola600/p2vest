@@ -9,6 +9,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AppTextField from '../../components/Input/AppTextField';
 import DropdownField from '../../components/Input/Dropdown';
+import { SecureStorage } from '../../services/secureStorage';
+import Toast from 'react-native-toast-message';
+import { useBankStore } from '../../utils/lib/data/bankDetails';
 
 const AddBank = ({ isVisible, onClose, info }: any) => {
     const {
@@ -26,15 +29,41 @@ const AddBank = ({ isVisible, onClose, info }: any) => {
     const pickBank = (item: any) => {
         setBank(item)
     }
-    const onSubmit = handleSubmit((data) => {
+
+    const addBanks = useBankStore((state: any) => state.addToBank)
+    const onSubmit = handleSubmit(async (data) => {
 
         const bank = {
             bank: isBank
         }
 
         Object.assign(data, bank)
+        let lName = await SecureStorage.getInst().getValueFor("lName")
+        let fName = await SecureStorage.getInst().getValueFor("fName")
 
-        console.log(data)
+        if (lName && fName) {
+            const name = {
+                name: fName + " " + lName
+            }
+
+
+            Object.assign(data, name)
+
+
+        }
+
+        Toast.show({
+            type: "success",
+            text1: "Added"
+        })
+
+
+        addBanks(data)
+        // console.log(data)
+
+        onClose()
+
+
     })
 
 
@@ -70,7 +99,7 @@ const AddBank = ({ isVisible, onClose, info }: any) => {
                             <AppTextField
                                 control={control}
                                 title='Account Number'
-                                validationName='accountNumber'
+                                validationName='accNo'
                                 keyboardType='number-pad'
                             />
                             <View

@@ -13,6 +13,9 @@ import Login from "../assets/icons/Login.svg"
 import { Feather } from '@expo/vector-icons';
 import Key from "../assets/icons/key.svg"
 import InitialzeAll from "./initializeAll";
+import { useIsFocused } from "@react-navigation/native";
+import { UserBanks } from "../utils/lib/data/MockData";
+import { useBankStore } from "../utils/lib/data/bankDetails";
 
 type SignInScreen = NativeStackScreenProps<
     RootStackParamList,
@@ -21,7 +24,7 @@ type SignInScreen = NativeStackScreenProps<
 
 const SignIn = ({ navigation }: SignInScreen) => {
     const [isButtonLoading, setButtonLoading] = useState(false)
-
+    const isFocused = useIsFocused()
     const navigatetoDashBoard = () => {
         navigation.navigate("DashBoardScreen")
     }
@@ -31,12 +34,31 @@ const SignIn = ({ navigation }: SignInScreen) => {
         navigation.navigate("SignUp")
     }
 
+    const allBanks = useBankStore((state: any) => state.bank)
+    const addBanks = useBankStore((state: any) => state.addToBank)
+    const clearBanks = useBankStore((state: any) => state.clearBank)
+
+
+
 
     useEffect(() => {
         let result = InitialzeAll()
+        // clearBanks()
+
+        console.log(allBanks.length)
+
+        if (allBanks.length < 1) {
+            console.log("do ir")
+            addBanks(UserBanks[0])
+            addBanks(UserBanks[1])
+
+        } else {
+            console.log(allBanks)
+        }
 
 
-    }, [])
+
+    }, [isFocused])
 
     return (
         <BasicBackButtonLayout>

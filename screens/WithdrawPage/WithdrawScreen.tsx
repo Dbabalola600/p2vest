@@ -16,6 +16,7 @@ import WithdrawPin from "./WithDrawPin";
 import AddBank from "./AddBank";
 import { SecureStorage } from "../../services/secureStorage";
 import Toast from "react-native-toast-message";
+import { useBankStore } from "../../utils/lib/data/bankDetails";
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, "WithdrawScreen">
 
@@ -128,9 +129,13 @@ export default function WithdrawScreen({ navigation }: ScreenProps) {
 
 
 
+    const allBanks = useBankStore((state: any) => state.bank)
+    const addBanks = useBankStore((state: any) => state.addToBank)
+
+
     return (
         <LoggedInLayout>
-            <View style={apptw` mt-3`}>
+            <View style={apptw` mt-3 mb-5`}>
 
                 <View>
                     <MainHeader />
@@ -186,8 +191,9 @@ export default function WithdrawScreen({ navigation }: ScreenProps) {
 
                 <View>
 
-                    {UserBanks.map((item, index) => (
+                    {allBanks.map((item:any, index:any) => (
                         <Pressable
+                        key={index}
                             onPress={() => handleSelection(index)}
                             style={apptw`mx-3 mb-2   py-5 px-3
                             
