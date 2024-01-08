@@ -29,14 +29,7 @@ const BasicBackButtonLayout = ({ children }: BasicBackButtonLayoutProp) => {
                 style={apptw`bg-secondary   flex-1 shadow-md`}
                 // edges={["top", "left", "right"]}
             >
-                {/* <Pressable onPress={() => navigation.goBack()} style={tw.style("py-2 px-3", )}>
-                    <MaterialIcons
-                        name="keyboard-arrow-left"
-                        size={40}
-                        style={tw`bg-`}
-                        color="black"
-                    />
-                </Pressable> */}
+              
 
                 {children}
             </ScrollView>

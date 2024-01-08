@@ -9,6 +9,8 @@ import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { Pressable, TouchableOpacity } from "react-native";
 import apptw from "../utils/lib/tailwind";
 import { AntDesign, MaterialIcons, SimpleLineIcons } from "@expo/vector-icons";
+import WithdrawScreen from "../screens/WithdrawPage/WithdrawScreen";
+import VerifcationScreen from "../screens/VerificationScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,14 +27,14 @@ const AuthStack = () => {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerShown: true,
+                headerShown: false,
                 headerTitle: "",
                 headerStyle: {
                     backgroundColor: "transparent"
                 },
                 headerShadowVisible: false
             }}
-            initialRouteName='Welcome'
+            initialRouteName='SignIn'
 
         >
             <Stack.Screen
@@ -64,32 +66,33 @@ const AuthStack = () => {
 
 
             <Stack.Screen
+                name="VerificationScreen"
+                component={VerifcationScreen}
+            />
+
+
+            <Stack.Screen
                 name="DashBoardScreen"
                 component={AppStack}
                 options={{
                     headerTitle: '',
-                    headerRight: () => (
-                        <TouchableOpacity
-                            onPress={() => { }}
-                        >
-                            <AntDesign
-                                name="bells"
-                                size={20}
-                                style={{ marginRight: 15 }}
-                                color="black"
-                            />
-                        </TouchableOpacity>
-                    ),
-                    headerLeft: () => (
-                        <Pressable onPress={() => toggle()} style={apptw``}>
-                            <SimpleLineIcons
-                                name="menu"
-                                size={20}
-                                style={apptw`bg-white`}
-                                color="black"
-                            />
-                        </Pressable>
-                    )
+                    headerShown: false,
+
+
+                }}
+            />
+
+
+
+
+            <Stack.Screen
+                name="WithdrawScreen"
+                component={WithdrawScreen}
+                options={{
+                    headerTitle: '',
+                    headerShown: false,
+
+
                 }}
             />
         </Stack.Navigator>

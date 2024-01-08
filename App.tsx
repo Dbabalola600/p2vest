@@ -18,11 +18,50 @@ import Tabs from './Navigation/Tabs';
 import AuthStack from './Navigation/AuthStack';
 import AppStack from './Navigation/AppStack';
 
+import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';
 
 
 
 
 
+
+
+const toastConfig = {
+  /*
+    Overwrite 'success' type,
+    by modifying the existing `BaseToast` component
+  */
+  success: (props: React.JSX.IntrinsicAttributes & BaseToastProps) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: 'green' }}
+
+      contentContainerStyle={{ paddingHorizontal: 10, }}
+      text1Style={{
+        fontSize: 20,
+        fontWeight: '400'
+      }}
+    />
+  ),
+  /*
+    Overwrite 'error' type,
+    by modifying the existing `ErrorToast` component
+  */
+  error: (props: React.JSX.IntrinsicAttributes & BaseToastProps) => (
+    <ErrorToast
+      {...props}
+      text1Style={{
+        fontSize: 17
+      }}
+      style={{ borderLeftColor: 'red' }}
+      contentContainerStyle={{ paddingHorizontal: 10, }}
+      text2Style={{
+        fontSize: 15
+      }}
+    />
+  ),
+
+};
 
 
 
@@ -36,7 +75,7 @@ export default function App() {
   return (
 
     <SafeAreaProvider>
-      <StatusBar />
+      {/* <StatusBar /> */}
 
 
       <NavigationContainer>
@@ -44,7 +83,7 @@ export default function App() {
         <AuthStack />
       </NavigationContainer>
 
-
+      <Toast config={toastConfig} />
 
     </SafeAreaProvider>
 

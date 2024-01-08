@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "expo-reactnative-typescript",
-    "slug": "expo-reactnative-typescript",
+    "name": "p2vest",
+
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/Logo.svg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icons/Home_Page.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#E5F4F3"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icons/Home_Page.png",
+        "backgroundColor": "#E5F4F3"
       }
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
+    
   }
 }

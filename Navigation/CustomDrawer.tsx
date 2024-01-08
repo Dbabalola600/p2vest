@@ -1,76 +1,88 @@
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
-import { View, Text, ImageBackground, Image, Pressable  } from "react-native";
+import { View, Text, ImageBackground, Image, Pressable } from "react-native";
 import AppText from "../components/Display/AppText";
 import apptw from "../utils/lib/tailwind";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-
+import SearchBar from "../components/Input/SearchBar";
+import { useState } from "react";
+import Logo from "../assets/icons/Logo.svg"
 export default function CustomDrawer(props: any) {
-   
+    const [useSearch, SetSearch] = useState("")
     const navigation = useNavigation()
-   
+
+
+    const search = (text: any) => {
+        console.log(text)
+
+
+        SetSearch(text)
+
+        console.log(text)
+    }
+
     return (
         <DrawerContentScrollView
             contentContainerStyle={{
-                // paddingBottom: 40,
-                // paddingTop: 90,
-                backgroundColor: "white",
-                // flex: 1,
-                // justifyContent: "space-between"
+
+                backgroundColor: "rgba(67, 145, 166, 1)",
+
+                height: "100%"
+
             }}
             {...props}
         >
-            <ImageBackground
-
-                style={{
-                    padding: 20, flexDirection: "row"
-                }}
-            >
-                {/* <Image
-                     source={require(" ")}
-                    style={{
-                        height: 50,
-                        width: 50,
-                        borderRadius: 40,
-                        marginBottom: 10
-                    }}
-                /> */}
-                <View
-                    style={apptw` mx-5 `}
-                >
-                    <AppText
-                        style={apptw`text-5 text-white `}
-                    >
-                        Welcome Dr,
-                    </AppText>
-                    <AppText
-                        style={apptw`text-3 text-white `}
-                    >
-                        What do you want today?
-                    </AppText>
-                </View>
 
 
 
-            </ImageBackground>
+
+
+
 
             <View
+                style={apptw`flex flex-col justify-between  h-[50%]`}
             >
-                <DrawerItemList {...props} />
-            </View>
 
-            <Pressable
-                onPress={()=>navigation.navigate("SignIn")}
-                    style={apptw`bg-white flex-row px-5 pt-5`}
+
+                <View
+
+                    style={apptw`flex justify-between`}
                 >
-                    <SimpleLineIcons name="logout" size={24} color="black" />
-                    <AppText
-                    style={apptw`mx-10`}
+                    <View
+                        style={apptw`mx-4 my-5`}
                     >
-                        Logout
-                    </AppText>
-                </Pressable>
 
+                        <Logo
+
+                        />
+                    </View>
+
+                    <View>
+                        <SearchBar onPress={search} />
+
+                    </View>
+
+                    <DrawerItemList {...props} />
+
+                    <Pressable
+
+                        style={apptw`bg- flex-row px-5 pt-5 -end`}
+                    >
+                        <SimpleLineIcons name="logout" size={24} color="#BC4B52" />
+                        <AppText
+                            style={apptw`mx-10`}
+                        >
+                            Logout
+                        </AppText>
+                    </Pressable>
+
+                </View>
+                <AppText
+                    style={apptw`mx-10`}
+                >
+                    Logout
+                </AppText>
+            </View>
 
 
         </DrawerContentScrollView>

@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { ScrollView, View, Pressable, Image } from "react-native";
+import { ScrollView, View, Pressable, Image, TextInput } from "react-native";
 import AppButton from "../components/Display/AppButton";
 import AppText from "../components/Display/AppText";
 import PressAppText from "../components/Display/PressAppText";
@@ -10,6 +10,8 @@ import apptw from "../utils/lib/tailwind";
 import { RootStackParamList } from "./allroutes";
 import tw from "twrnc"
 import { Checkbox } from "expo-checkbox";
+import CreateAccount from "../assets/icons/createAccount.svg"
+import Toast from "react-native-toast-message";
 
 type SignUpScreen = NativeStackScreenProps<
     RootStackParamList,
@@ -18,9 +20,7 @@ type SignUpScreen = NativeStackScreenProps<
 
 const SignUp = ({ navigation }: SignUpScreen) => {
     const [isButtonLoading, setButtonLoading] = useState(false)
-    // const { isError, isLoading, isSuccess, loginErrorMessage } = useSelector(authSelector);
-
-    // const dispatch = useDispatch<AppDispatch>();
+    const [isPhonenum, setPhone] = useState("")
 
     const navigateToSignIn = () => {
         navigation.navigate("SignIn")
@@ -30,11 +30,57 @@ const SignUp = ({ navigation }: SignUpScreen) => {
 
 
 
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const handlePasswordChange = (value: any) => {
+        setPassword(value);
+    };
+
+    const handleConfirmPasswordChange = (value: any) => {
+        setConfirmPassword(value);
+    };
+
+
+    const handlePhone = (thing: any) => {
+
+        console.log(thing)
+        setPhone(thing)
+    }
+
+
+    const comparePasswords = () => {
+        if (password === confirmPassword && password!== "" && confirmPassword !== "") {
+            console.log(isPhonenum);
+
+            Toast.show({
+                type: "success",
+                text1: "Sent"
+            })
+
+            navigation.navigate("VerificationScreen", {number: isPhonenum})
+        } else {
+            Toast.show({
+                type: "error",
+                text1: "Passwords must match"
+            })
+            console.log('Passwords do not match');
+        }
+    };
+
+
+
+  
 
 
     return (
         <BasicBackButtonLayout>
-            <>
+            <View
+                style={apptw`mt-30`}
+            >
+                <View style={apptw`mx-auto`}>
+                    <CreateAccount />
+                </View>
 
                 <ScrollView
                     style={tw`px-5 `}
@@ -42,58 +88,58 @@ const SignUp = ({ navigation }: SignUpScreen) => {
                         flexGrow: 1,
                     })}
                 >
-                    <View>
+                    <View style={apptw`gap-y-4`}>
 
                         <AppText
-                            style={apptw`text-3xl text-center text-black`}>
-                            Register Account
-                        </AppText>
-                        <AppText
-                            style={apptw`text-lg text-center  pb-5`}>
-                            Fill your details or continue with
-                            social media
+                            style={apptw`text-xl text-black`}>
+                            Create your  Account
                         </AppText>
 
-
-                        <AppTextField
-                            title="Firstname"
-                            validationName="userName"
-                            placeholder="Firstname"
-                        />
-
-                        <AppTextField
-                            title="Firstname"
-                            validationName="userName"
-                            placeholder="lastname"
-                        />
-
-                        <AppTextField
-                            title="Email"
-                            validationName="email"
-                            placeholder="example@gmail.com"
-                        />
-
-                        <AppTextField
-                            title="Password"
-                            validationName="password"
-                            placeholder="***********"
-                            isPassword={true}
-                        />
 
                         <View
-                            style={apptw`flex-row`}
+                            style={apptw` bg-white rounded-lg py-5 px-2  border flex-row`}
                         >
-                            <Checkbox
-                                style={apptw``}
-                                value={isChecked}
-                                onValueChange={setChecked}
-                                color={isChecked ? '#4630EB' : undefined}
+                            <TextInput
+                                placeholder="Phone Number"
+                                style={apptw`px-2 w-full`}
+                                keyboardType="phone-pad"
+                                onChangeText={handlePhone}
+                                value={isPhonenum}
                             />
-                            <AppText>
-
-                                I accept all the Terms & Conditions
-                            </AppText>
                         </View>
+
+
+
+
+
+                        <View
+                            style={apptw` bg-white rounded-lg py-5 px-2  border flex-row`}
+                        >
+                            <TextInput
+                                placeholder="Password"
+                                style={apptw`px-2 w-full`}
+
+                                onChangeText={handlePasswordChange}
+                                value={password}
+                            />
+                        </View>
+
+
+
+                        <View
+                            style={apptw` bg-white rounded-lg py-5 px-2  border flex-row`}
+                        >
+                            <TextInput
+                                placeholder=" Confirm Pasword"
+                                style={apptw`px-2 w-full`}
+
+                                value={confirmPassword}
+                                onChangeText={handleConfirmPasswordChange}
+                                onBlur={comparePasswords}
+                            />
+                        </View>
+
+
 
 
                     </View>
@@ -107,90 +153,44 @@ const SignUp = ({ navigation }: SignUpScreen) => {
                         <AppButton
                             buttonStyle={apptw`  my-6`}
                             text={isButtonLoading ? "Loading..." : "Register"}
-                            onPress={navigateToSignIn}
+                            onPress={comparePasswords}
                         // text="Create Account"
-
                         />
 
 
-                        <View
-                            style={apptw`flex-row justify-between items-center mb-3`}
-                        >
-                            <View
-                                style={{
-                                    borderBlockColor: "gray",
-                                    borderBottomWidth: 1,
-                                    width: 100,
-                                    paddingBottom: 10
-                                }}
-                            />
-                            <AppText style={apptw`font-bold pt-2 mx-2 mx-auto`}>
 
-                                Or sign in with
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <View style={apptw`mb-19 flex-row  justify-between mx-auto bg-`}>
+                            <AppText style={apptw`self-center text-zinc-400 text-[4]`}>
+                                Already have an account?{' '}
                             </AppText>
-                            <View
-                                style={{
-                                    borderBlockColor: "gray",
-                                    borderBottomWidth: 1,
-                                    width: 100,
-                                    paddingBottom: 10
-                                }}
-                            />
-                        </View>
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <View>
-                            <Pressable>
-
-                                <View style={apptw`rounded-lg bg-white flex-row justify-center items-center py-3`}>
-
-
-                                    <Image
-                                        source={require("../assets/google_logo.png")}
-                                        style={apptw`mx-0 px-0`}
-                                    />
-                                    <AppText style={apptw`font-bold pt-0 mx-0`}>
-
-
-                                        {" "} Sign Up with Google
-                                    </AppText>
-                                </View>
-
-
-                            </Pressable>
-
-                        </View>
-
-                        <AppText style={apptw`self-center text-zinc-400 text-[4]`}>
-                            Already have an account?{' '}
-
-
                             <PressAppText
                                 onPress={navigateToSignIn}
-                                style={apptw`text-primary top-[1]  `}>
+                                style={apptw`text-primary   `}>
                                 Sign In
                             </PressAppText>
 
-
-
-                        </AppText>
+                        </View>
 
 
                     </View>
                 </ScrollView>
 
-            </>
+            </View>
 
         </BasicBackButtonLayout>
     )

@@ -5,4 +5,6 @@ export type RootStackParamList ={
     SignIn: undefined
     SignUp: undefined
     ProfileScreen: undefined
+    WithdrawScreen: undefined
+    VerificationScreen: {number:any}
 }

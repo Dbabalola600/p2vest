@@ -20,35 +20,13 @@ const LoggedInLayout = ({ children }: LoggedInLayoutProp) => {
         >
 
             <ScrollView
-                style={apptw.style(`bg-white  flex-1 shadow-md py-6 pt-10 pb-5`)}
+                style={apptw.style(`bg-white  flex-1 shadow-md `)}
                 contentContainerStyle={apptw`flex-grow`}
 
             // edges={["top", "left", "right", "bottom"]}
             >
 
-                {/* <View style={tw`flex-row justify-between py-4 px-6`} >
-
-                    <Pressable onPress={() => navigation.toggleDrawer()} style={tw.style("",)}>
-                        <SimpleLineIcons
-                            name="menu"
-                            size={20}
-                            style={tw`bg-white`}
-                            color="black"
-                        />
-                    </Pressable>
-
-                    <Pressable 
-                    // onPress={navigateToNotifications} 
-                    style={tw.style("",)}>
-                        <AntDesign
-                            name="bells"
-                            size={20}
-                            style={tw`bg-white`}
-                            color="black"
-                        />
-                    </Pressable>
-
-                </View> */}
+               
 
 
                 {children}

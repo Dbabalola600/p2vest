@@ -55,10 +55,10 @@ const AppTextField = (props: AppTextFieldProps) => {
                                 {props?.title}
                             </AppText>
                             <View
-                                style={apptw`h-[18] w-full bg-textField mt-2 rounded-md flex items-center justify-between  p-4 border-2 flex-row ${
+                                style={apptw`h-[18] w-full bg-textField mt-2 rounded-md flex items-center justify-between  p-4 border flex-row ${
                                     props.errorMessage
                                         ? " border-red-700"
-                                        : "border-transparent"
+                                        : ""
                                 }`}
                             >
                                 <MyTextInput
