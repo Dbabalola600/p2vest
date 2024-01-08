@@ -1,7 +1,6 @@
 {
   "expo": {
     "name": "p2vest",
-
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/Logo.svg",
@@ -19,14 +18,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/Home_Page.png",
+        "foregroundImage": "./assets/icons/Logo.svg",
         "backgroundColor": "#E5F4F3"
-      }
-
+      },
+      "package": "com.dami600b.p2vest"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "194c7ac7-1a5e-4037-893f-cac03aa8282f"
+      }
     }
-    
   }
 }
