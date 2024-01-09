@@ -16,6 +16,8 @@ import InitialzeAll from "./initializeAll";
 import { useIsFocused } from "@react-navigation/native";
 import { UserBanks } from "../utils/lib/data/MockData";
 import { useBankStore } from "../utils/lib/data/bankDetails";
+import { Controller, useForm } from "react-hook-form";
+import Toast from "react-native-toast-message";
 
 type SignInScreen = NativeStackScreenProps<
     RootStackParamList,
@@ -40,6 +42,13 @@ const SignIn = ({ navigation }: SignInScreen) => {
 
 
 
+    const {
+        control,
+        handleSubmit,
+        setError,
+        formState: { errors },
+    } = useForm()
+
 
     useEffect(() => {
         let result = InitialzeAll()
@@ -60,6 +69,34 @@ const SignIn = ({ navigation }: SignInScreen) => {
 
     }, [isFocused])
 
+
+
+
+    const onSubmit = handleSubmit((data) => {
+        console.log(data)
+
+
+        if (data.username !== "Admin") {
+            setError("username", {
+                type: "manual",
+                message: "Invalid username"
+            })
+        } if (data.password !== "Password") {
+            setError("password", {
+                type: "manual",
+                message: "Invalid password"
+            })
+        } else if(data.username === "Admin" && data.password === "Password" ) {
+            Toast.show({
+                type: "success",
+                text1: "Sucess"
+            })
+            navigatetoDashBoard()
+        }
+
+
+
+    })
     return (
         <BasicBackButtonLayout>
             <View style={apptw`mt-30`}>
@@ -75,49 +112,95 @@ const SignIn = ({ navigation }: SignInScreen) => {
                     <View style={apptw`gap-y-10`}>
 
 
+                        < View>
 
-                        <View
-                            style={apptw` bg-white rounded-lg py-5 px-2  border flex-row`}
-                        >
-                            <Feather name="users" size={24} color="rgba(67, 145, 166, 1)" />
-                            <TextInput
-                                placeholder="Username"
-                                style={apptw`px-2 w-full`}
-                            />
-                        </View>
+                            <View
+                                style={apptw` bg-white rounded-lg py-5 px-2  border flex-row`}
+                            >
+                                <Feather name="users" size={24} color="rgba(67, 145, 166, 1)" />
 
+                                <Controller
+                                    name="username"
+                                    control={control}
 
+                                    render={({ field: { onChange, value } }) => (
 
-                        <View
-                            style={apptw` bg-white rounded-lg py-5 px-2  border flex-row justify-between`}
-                        >
-                            <View style={apptw`flex-row`}>
-                                <Key height={30} width={30} />
-                                <TextInput
-                                    placeholder="Password"
+                                        <TextInput
+                                            placeholder="Username"
+                                            value={value}
+                                            onChangeText={onChange}
+                                            style={apptw`px-2 w-full`}
+                                        />
 
-                                    style={apptw`px-2 w-full`}
+                                    )}
+
                                 />
+
+
                             </View>
 
+                            {errors.username && (
+                                <AppText style={apptw`text-red-500`}>
+                                    {errors?.username?.message}
+                                </AppText>
+                            )}
+                        </View>
 
 
 
-                            <PressAppText
-                                // onPress={navigatetoForgotPassword}
-                                style={apptw`text-primary `}
+                        <View>
+                            <View
+                                style={apptw` bg-white rounded-lg py-5 px-2  border flex-row justify-between`}
                             >
-                                Forgot
-                            </PressAppText>
+                                <View style={apptw`flex-row`}>
+                                    <Key height={30} width={30} />
 
+                                    <Controller
+                                        name="password"
+                                        control={control}
+                                        render={({ field: { onChange, value } }) => (
+
+                                            <TextInput
+                                                placeholder="Password"
+                                                value={value}
+                                                onChangeText={onChange}
+                                                style={apptw`px-2 w-1/2`}
+
+                                            />
+                                        )}
+                                    />
+
+
+
+                                </View>
+
+
+
+
+                                <PressAppText
+                                    // onPress={navigatetoForgotPassword}
+                                    style={apptw`text-primary `}
+                                >
+                                    Forgot
+                                </PressAppText>
+
+
+                            </View>
+
+                            {errors.password && (
+                                <AppText style={apptw`text-red-500`}>
+                                    {errors?.password?.message}
+                                </AppText>
+                            )}
 
                         </View>
+
 
 
                         <AppButton
-                            buttonStyle={apptw`  my-6`}
+                            buttonStyle={apptw`my-6`}
                             // text={isButtonLoading ? "Loading..." : "Sign In"}
-                            onPress={navigatetoDashBoard}
+                            onPress={onSubmit}
                             text="Sign In"
 
                         />
@@ -130,14 +213,14 @@ const SignIn = ({ navigation }: SignInScreen) => {
                     </View>
 
                 </ScrollView>
-                <View style={apptw` flex top-[20] left-[1]  `} >
+                <View style={apptw` flex top-[15] left-[1]  `} >
                     <View style={apptw`mb-19 flex-row  justify-between mx-auto bg-`}>
 
 
 
 
                         <AppText style={apptw`self-center text-zinc-400 text-[4]`}>
-                            Don't have an account?
+                            Don't have an account?{' '}
 
 
 

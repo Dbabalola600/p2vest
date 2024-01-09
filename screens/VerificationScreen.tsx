@@ -9,6 +9,7 @@ import { RootStackParamList } from "./allroutes"
 import { useState, useEffect } from "react"
 import AppButton from "../components/Display/AppButton"
 import Toast from "react-native-toast-message"
+import { Controller, useForm } from "react-hook-form"
 
 
 
@@ -45,20 +46,26 @@ const VerifcationScreen: React.FC<Props> = ({ route }) => {
 
 
 
-    const onsubmit = () => {
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const onsubmit = handleSubmit((data) => {
         Toast.show({
             type: "success",
             text1: "Sucess"
         })
         navigation.navigate("SignIn")
-    }
+    })
 
 
     return (
 
         <KeyboardAvoidingView
-        style={apptw` flex-1`}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={apptw` flex-1`}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
             <BasicBackButtonLayout>
                 <View style={apptw`mt-30`}>
@@ -75,7 +82,7 @@ const VerifcationScreen: React.FC<Props> = ({ route }) => {
                         style={apptw`my-3`}
                     >
                         <AppText style={apptw`text-center`}>
-                            Enter the 4 digits number that was  sent to {route?.params?.number}
+                            Enter the 4 digits number that was sent to {route?.params?.number}
                         </AppText>
 
                     </View>
@@ -83,10 +90,21 @@ const VerifcationScreen: React.FC<Props> = ({ route }) => {
 
 
                     <View style={apptw`mx-3`}>
-                        <AppPinCode
-                            numberOfPins={4}
-                            keyboardType="number-pad"
-
+                        <Controller
+                            name="verificationPin"
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                                <AppPinCode
+                                    numberOfPins={4}
+                                    keyboardType="number-pad"
+                                    containerStyle={apptw`mt-10`}
+                                    onChangeText={onChange}
+                                    value={value}
+                                // errorMessage={
+                                //     errors.verificationPin?.message
+                                // }
+                                />
+                            )}
                         />
 
 
@@ -103,7 +121,7 @@ const VerifcationScreen: React.FC<Props> = ({ route }) => {
 
                     <View>
                         <AppText style={apptw`text-center`}>
-                            Resend conde in <AppText style={apptw`text-primary`}> 0.{seconds}</AppText>
+                            Resend code in <AppText style={apptw`text-primary`}> 0.{seconds}</AppText>
                         </AppText>
                     </View>
 

@@ -8,6 +8,7 @@ import AppButton from '../../components/Display/AppButton';
 import { useState } from 'react';
 import AppPinCode from '../../components/Input/AppPinCode';
 import { Controller, useForm } from 'react-hook-form';
+import Toast from 'react-native-toast-message';
 
 
 
@@ -15,6 +16,7 @@ const WithdrawPin = ({ isVisible, onClose, subTract }: any) => {
     const {
         control,
         handleSubmit,
+        setError,
         formState: { errors },
     } = useForm()
 
@@ -23,7 +25,18 @@ const WithdrawPin = ({ isVisible, onClose, subTract }: any) => {
     const onSubmit = handleSubmit((data) => {
         console.log(data)
 
-        subTract()
+
+        if (data.verificationPin === "1234") {
+            console.log("yes")
+              subTract()
+        } else {
+            setError('verificationPin', {
+                type: 'manual',
+                message: 'Invalid verification pin',
+              });
+        }
+
+      
     })
 
     return (
@@ -68,10 +81,7 @@ const WithdrawPin = ({ isVisible, onClose, subTract }: any) => {
 
 
                             <View>
-                                {/* <AppPinCode numberOfPins={4}
-                            // containerStyle={apptw`bg-red-500 flex`}
-                            keyboardType='number-pad'
-                        /> */}
+                             
 
 
                                 <Controller
@@ -84,9 +94,7 @@ const WithdrawPin = ({ isVisible, onClose, subTract }: any) => {
                                             containerStyle={apptw`mt-10`}
                                             onChangeText={onChange}
                                             value={value}
-                                        // errorMessage={
-                                        //     errors.verificationPin?.message
-                                        // }
+                                            errorMessage={errors?.verificationPin?.message}
                                         />
                                     )}
                                 />

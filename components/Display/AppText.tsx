@@ -25,7 +25,7 @@ type PoppinFont =
     | "poppinsI";
 
 type AppTextProp = {
-    children: React.ReactNode;
+    children: React.ReactNode |any;
     style?: Style;
     fontFamily?: PoppinFont | undefined;
     

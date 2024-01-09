@@ -13,7 +13,7 @@ type AppPinCodeProps = {
     keyboardType?: KeyboardType;
     numberOfPins: number;
     containerStyle?: Style;
-    errorMessage?: string;
+    errorMessage?: string |any;
 };
 
 const AppPinCode = ({
