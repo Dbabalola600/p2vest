@@ -17,6 +17,7 @@ this was built using react native expo with typescript
 - Sign up up until verification code 
 - Wallet page 
 - Withdraw page
+- Dynamic data 
 
 ## Features 
 - username: Admin 
