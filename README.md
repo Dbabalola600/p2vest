@@ -35,7 +35,6 @@ this was built using react native expo with typescript
 - input an amount and click on withdraw follow the on screen prompts, use the pin 1234 to conduct transaction
 
 ## Issues faced
-- 
 
 - getting the appropriate images from the figma file
 
