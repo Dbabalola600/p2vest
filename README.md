@@ -40,12 +40,10 @@ this was built using react native expo with typescript
 
 
 
-
-
-
-
-
 ## Running 
 - run `` npm install``
 - To run ensure all necessary packages are installed then run with  `` npm start ``
-- Select with device to run with or scan the qr code with the expo app mobile installed  
+- Select with device to run with or scan the qr code with the expo app mobile installed
+
+## Or
+- download apk from --> https://drive.google.com/file/d/1YdWgACc5g2Dd26SLJzkex5lS3123FKl0/view?usp=drive_link
