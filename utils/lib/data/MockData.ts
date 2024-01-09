@@ -1,7 +1,7 @@
 export const TransactionHistory =[
-    { name: "Top Up Account", amount :"50,000", type:"credit", date:"     24 Oct. 2024 8:54pm"},
-    { name: "Rent Payment", amount :"50,000", type:"debit", date:"     24 Oct. 2024 8:54pm"},
-    { name: "Rent Payment", amount :"50,000", type:"credit", date:"     24 Oct. 2024 8:54pm"},
+    { name: "Top Up Account", amount :"50,000", type:"credit", date:"24 Oct. 2024 8:54pm"},
+    { name: "Rent Payment", amount :"50,000", type:"debit", date:"24 Oct. 2024 8:54pm"},
+    { name: "Rent Payment", amount :"50,000", type:"credit", date:"24 Oct. 2024 8:54pm"},
 ]
 
 

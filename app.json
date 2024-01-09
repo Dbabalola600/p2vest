@@ -3,7 +3,7 @@
     "name": "p2vest",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/Logo.svg",
+    "icon": "./assets/icons/Logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/icons/Home_Page.png",
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/Logo.svg",
+        "foregroundImage": "./assets/icons/Logo.png",
         "backgroundColor": "#E5F4F3"
       },
       "package": "com.dami600b.p2vest"

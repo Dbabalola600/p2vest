@@ -28,8 +28,8 @@ const TransActionsDrawer = ({ isVisible, onClose }:any) => {
 
                     </View>
 
-                    <View style={apptw`flex-row justify-between `}>
-                        <AppText>
+                    <View style={apptw`flex-row justify-between mt-4 `}>
+                        <AppText style={apptw`font-bold`}>
                             Last Transactions
                         </AppText>
 
@@ -51,8 +51,8 @@ const TransActionsDrawer = ({ isVisible, onClose }:any) => {
                                     </View>
 
 
-                                    <View>
-                                        <AppText style={apptw``}>
+                                    <View style={apptw`mx-auto ml-1`}>
+                                        <AppText style={apptw`font-bold `}>
                                             {item.name}
                                         </AppText>
                                         <AppText style={apptw`text-sm`}>
@@ -64,7 +64,7 @@ const TransActionsDrawer = ({ isVisible, onClose }:any) => {
 
                                 <View>
                                     <AppText>
-                                        {item.amount}
+                                      {item.type === "debit" && "-"}{item.amount}
                                     </AppText>
                                 </View>
 
